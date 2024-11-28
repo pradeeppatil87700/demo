@@ -31,6 +31,10 @@ public class LoginTest {
     		
             System.out.println("First Commit changes");
             System.out.println("Second Commit changes");
+            System.out.println("First Commit changes");
+            System.out.println("Second Commit changes");
+            System.out.println("First Commit changes");
+            System.out.println("Second Commit changes");
             
             
             // Enter valid credentials and click login
