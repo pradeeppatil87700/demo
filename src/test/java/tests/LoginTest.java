@@ -1,61 +1,60 @@
 package tests;
 
+import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-// Pages
 import pages.LoginPage;
-import base.BasePage;
 import utils.BrowserUtils;
+
 
 public class LoginTest {
 
-    public WebDriver driver;
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setup() {
+        // Initialize WebDriver using the BasePage and configuration
+        driver = BasePage.getDriver(); // Browser is read from config.properties
+
+        // Navigate to the login page
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+    }
+    
+    
+
+    @AfterMethod
+    public void teardown() {
+        BasePage.quitDriver();
+    }
+
     @Test
     public void loginWithValidCredentials() {
         try {
-       	
-        	 System.setProperty("webdriver.chrome.driver", "C:\\Users\\Asus\\Downloads\\chromedriver.exe");
-		     WebDriver driver = new ChromeDriver();
-		     BrowserUtils.maximizWindow(driver); 
-             
-		      
-	
-            LoginPage object = new LoginPage(driver);
-            driver.get("https://practicetestautomation.com/practice-test-login/");
-    		
-            System.out.println("This is the second commit newest");
-          
-            
-            
-            
-            // Enter valid credentials and click login
-            object.enterUsername("student");
-            object.enterPassword("Password123");
-            object.buttonClick();
+            // Initialize LoginPage
+            LoginPage loginPage = new LoginPage(driver);
+
+            // Perform login
+            loginPage.enterUsername("student");
+            loginPage.enterPassword("Password123");
+            loginPage.clickLoginButton();
 
             // Validate the success message
-            String actual = driver.findElement(By.cssSelector("div[class='post-header'] h1[class='post-title']"))
-                    .getText();
+            String actual = driver.findElement(By.cssSelector("div[class='post-header'] h1[class='post-title']")).getText();
             String expected = "Logged In Successfully";
-            Assert.assertEquals(actual, expected, "Login was not successfully");
+            Assert.assertEquals(actual, expected, "Login was not successful");
 
             // Log the result and take a screenshot
             System.out.println("Login Test Passed: User successfully logged in.");
-          
-            //BrowserUtils.takeScreenshot(driver, "LoginTest", "Pass");
+            BrowserUtils.takeScreenshot(driver, "LoginTest", "Pass");
 
         } catch (Exception e) {
-            System.out.println("Error during login test: " + e.getMessage());
-            Assert.fail("Test failed due to exception.");
+            System.err.println("Error during login test: " + e.getMessage());
+            BrowserUtils.takeScreenshot(driver, "LoginTest", "Fail");
+            Assert.fail("Test failed due to exception: " + e.getMessage());
         }
-        driver.close();
     }
-
-
 }

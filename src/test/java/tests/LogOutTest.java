@@ -9,49 +9,50 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 // Base and Utility Classes
-import base.BasePage;
 import pages.LogOutPage;
 import utils.BrowserUtils;
 
 public class LogOutTest {
 
-    public WebDriver driver; 
- 
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setup() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Asus\\Downloads\\chromedriver.exe");
+        driver = new ChromeDriver();
+      //  BrowserUtils.maximizeWindow(driver); // Corrected method call
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+    }
+
+    @AfterMethod
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
     @Test
     public void testInvalidUsername() {
         try {
-        	
-           
-        	 System.setProperty("webdriver.chrome.driver", "C:\\Users\\Asus\\Downloads\\chromedriver.exe");
-			 WebDriver driver = new ChromeDriver();
-			 BrowserUtils.maximizWindow(driver); 
-            LogOutPage object = new LogOutPage(driver);
-           // object.navigateTo("https://practicetestautomation.com/practice-test-login/");
-            driver.get("https://practicetestautomation.com/practice-test-login/");
-			
-            
-            // Enter incorrect username
-            object.enterUsername("student1"); // Incorrect username
-            object.enterPassword("Password123");
-            object.buttonClick();
-            
-           
-           // Validate error message for invalid username
-             String actual = driver.findElement(By.cssSelector("div[id='error']")).getText();
-             String expected = "Your username is invalid!";
-             Assert.assertEquals(actual, expected, "Invalid Username :::");
-            
-            System.out.println("done logiv");
+            // Initialize LogOutPage
+            LogOutPage logOutPage = new LogOutPage(driver);
 
-            // Take screenshot on failure
-            BrowserUtils.takeScreenshot(driver, "LogOutTest", "Fail");
+            // Enter incorrect username and password
+            logOutPage.enterUsername("student1"); // Incorrect username
+            logOutPage.enterPassword("Password123");
+            logOutPage.clickLoginButton();
+
+            // Validate error message for invalid username
+            String actualErrorMessage = driver.findElement(By.cssSelector("div[id='error']")).getText();
+            String expectedErrorMessage = "Your username is invalid!";
+            Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Invalid Username Error Message Mismatch");
+
+            System.out.println("LogOut Test Passed: Invalid username error validated.");
 
         } catch (Exception e) {
-            System.out.println("Error during logout test: " + e.getMessage());
-            Assert.fail("Test failed due to exception.");
+            System.err.println("Error during logout test: " + e.getMessage());
+            BrowserUtils.takeScreenshot(driver, "LogOutTest", "Fail");
+            Assert.fail("Test failed due to exception: " + e.getMessage());
         }
-        driver.close();
     }
-
-   
 }

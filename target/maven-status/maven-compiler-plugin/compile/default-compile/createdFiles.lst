@@ -1,0 +1,4 @@
+base\BasePage.class
+pages\LoginPage.class
+pages\LogOutPage.class
+utils\BrowserUtils.class

@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Login Feature]">
-  <test thread-count="5" name="regressionDosee(failed)">
+<suite thread-count="2" parallel="tests" name="Failed suite [Login Feature]" guice-stage="DEVELOPMENT">
+  <test thread-count="2" parallel="tests" name="Login Features(failed)">
     <classes>
       <class name="tests.LogOutTest">
         <methods>
           <include name="testInvalidUsername"/>
+          <include name="setup"/>
+          <include name="teardown"/>
         </methods>
       </class> <!-- tests.LogOutTest -->
       <class name="tests.LoginTest">
         <methods>
           <include name="loginWithValidCredentials"/>
+          <include name="setup"/>
+          <include name="teardown"/>
         </methods>
       </class> <!-- tests.LoginTest -->
     </classes>
-  </test> <!-- regressionDosee(failed) -->
+  </test> <!-- Login Features(failed) -->
 </suite> <!-- Failed suite [Login Feature] -->

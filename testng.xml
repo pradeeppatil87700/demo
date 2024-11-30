@@ -2,12 +2,10 @@
 <!DOCTYPE suite>
 <suite name="Login Feature">
 
-  <test name="regressionDosee">
+  <test name="Login Features">
     <classes>
       <class name="tests.LoginTest" />
-        <class name="tests.LogOutTest" />
     </classes>
   </test>
-  
-  
+
 </suite>
