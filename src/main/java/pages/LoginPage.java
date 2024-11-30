@@ -38,7 +38,7 @@ public class LoginPage extends BasePage {
      * Navigates to the specified URL.
      *
      * @param url The URL to navigate to
-     */
+     */ 
     public void navigateTo(String url) {
         driver.get(url);
     }

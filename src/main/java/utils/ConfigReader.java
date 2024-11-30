@@ -17,12 +17,13 @@ public class ConfigReader {
             throw new RuntimeException("Failed to load config.properties file: " + e.getMessage());
         }
     }
+    
 
     public static String getProperty(String key) {
         // Check for system property first
         String systemValue = System.getProperty(key);
         if (systemValue != null) {
-            return systemValue;
+            //return systemValue;
         }
         // Fallback to the config.properties file
         return properties.getProperty(key);
