@@ -17,7 +17,7 @@ public class LoginTest {
 
     @BeforeMethod
     public void setup() {
-        // Initialize WebDriver using the BasePage and configuration
+        // Initialize WebDriver using the BasePage and configuration d
         driver = BasePage.getDriver(); // Browser is read from config.properties
 
         // Navigate to the login page
