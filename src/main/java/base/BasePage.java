@@ -9,7 +9,7 @@ public class BasePage {
 
     protected static WebDriver driver;
 
-    // Constructor
+    // Constructor Constructor
     public BasePage(WebDriver driver) {
         BasePage.driver = driver;
     }
