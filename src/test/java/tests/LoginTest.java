@@ -48,7 +48,8 @@ public class LoginTest {
             Assert.assertEquals(actual, expected, "Login was not successful");
 
             // Log the result and take a screenshot
-            System.out.println("Login Test Passed: User successfully logged in.");
+            System.out.println("Login Test Passed: User successfully logged in in ");
+            System.out.println("Login Test Passed: User successfully logged in in ");
             BrowserUtils.takeScreenshot(driver, "LoginTest", "Pass");
 
         } catch (Exception e) {
